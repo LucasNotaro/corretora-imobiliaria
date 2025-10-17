@@ -14,11 +14,13 @@ namespace CorretoraImobiliaria.Models
             if (string.IsNullOrWhiteSpace(telefone)) throw new ArgumentException("Telefone inválido.");
             if (string.IsNullOrWhiteSpace(cpf)) throw new ArgumentException("CPF inválido.");
 
+            if (!TelefoneValidator.ValidarTelefone(telefone))
+                throw new ArgumentException("Telefone inválido. Verifique os dígitos informados.");
             if (!CpfValidator.ValidarCpf(cpf))
                 throw new ArgumentException("CPF inválido. Verifique os dígitos informados.");
 
             Nome = nome.Trim();
-            Telefone = telefone.Trim();
+            Telefone = TelefoneValidator.FormatarTelefone(telefone);
             CPF = CpfValidator.FormatarCpf(cpf);
         }
 

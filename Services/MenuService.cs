@@ -117,6 +117,24 @@ namespace CorretoraImobiliaria.Services
             return cpf;
         }
 
+        private string LerTelefone(string label)
+        {
+            Console.Write(label);
+            string telefone;
+            while (!TelefoneValidator.ValidarTelefone(telefone = Console.ReadLine() ?? ""))
+            {
+                if (string.IsNullOrEmpty(telefone))
+                {
+                    Console.Write("Telefone vazio. Digite um telefone válido: ");
+                }
+                else
+                {
+                    Console.Write("Telefone inválido. Digite um telefone válido (11 dígitos): ");
+                }
+            }
+            return telefone;
+        }
+
         private void CadastrarImovel()
         {
             Console.WriteLine("\n=== CADASTRAR IMÓVEL ===");
@@ -135,7 +153,7 @@ namespace CorretoraImobiliaria.Services
 
             Console.WriteLine("\n--- Dados do Proprietário ---");
             string nomeProprietario = LerTexto("Nome do proprietário: ");
-            string telefoneProprietario = LerTexto("Telefone do proprietário: ");
+            string telefoneProprietario = LerTelefone("Telefone do proprietário: ");
             string cpfProprietario = LerCpf("CPF do proprietário: ");
 
             decimal valorDiario = LerDecimal("Valor do aluguel diário: ");
